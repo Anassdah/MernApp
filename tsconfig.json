@@ -1,0 +1,6 @@
+{
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "compilerOptions": {},
+    "include": ["config","models","routes/api"],
+    "exclude": ["node_modules","client"]
+  }

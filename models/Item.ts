@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema=mongoose.Schema ; 
 
-const ItemSchema = new Schema({
+const ItemSchema:any = new Schema({
     name:{
         type:String,
         required:true
@@ -9,6 +9,6 @@ const ItemSchema = new Schema({
     date:{
         type:Date,
         default:Date.now
-    }
+    },
 });
-module.exports = Item = mongoose.model('item' , ItemSchema);
+export const Item:any = mongoose.model('item' , ItemSchema);
