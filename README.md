@@ -1,1 +1,1 @@
-#MernApp using Typescript
+MernApp using Typescript
