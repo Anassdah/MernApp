@@ -2,10 +2,14 @@ import express from 'express';
 import mongoose from 'mongoose';  
 import { MongoURI } from './config/keys';  
 const items=require('./routes/api/items') 
+const cors=require('cors')
 
 const app:any = express();
-
+app.use(cors({
+    origin:"*"
+}))
 app.use(express.json());
+
 
 mongoose
            .connect(MongoURI)
