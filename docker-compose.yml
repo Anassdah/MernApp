@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  api-server:
+    image: api-server
+    ports:
+      - "4000:4000"
+    environment:
+      - DB-URL=mongodb://mongo/myFirstDatabase.items
+    networks:
+      - mern-app
+    depends_on:
+      - mongo
+  react-app:
+    image: react-app
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - mern-app
+    depends_on:
+      - api-server
+  mongo:
+    image: mongo:4.2.20-rc0-bionic
+    ports:
+    - "27017:27017"
+networks:
+  mern-app:
+    driver: bridge
