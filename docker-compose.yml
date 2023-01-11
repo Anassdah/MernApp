@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   api-server:
-    image: api-server
+    image: anassdahchour/api-server
     ports:
       - "4000:4000"
     environment:
@@ -11,7 +11,7 @@ services:
     depends_on:
       - mongo
   react-app:
-    image: react-app
+    image: anassdahchour/react-app
     stdin_open: true
     ports: 
       - "3000:3000"
