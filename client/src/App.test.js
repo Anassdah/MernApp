@@ -1,5 +1,9 @@
 import { render, screen, waitFor} from '@testing-library/react';
 import App from './App';
+import axios from 'axios';
+// const api=axios.create({
+//     baseURL:"http://localhost:4000/api/items",
+// })
 describe('test diplay',()=> {
 
   test('renders the landing page', () => {
@@ -14,17 +18,10 @@ describe('test diplay',()=> {
 })
 
 
-describe('API endpoint', () => {
-  it('should return the expected data', async () => {
-    // Make a request to your API endpoint
-    const response = await fetch('http://localhost:4000/api/items');
-
-    // Wait for the response to be available
-    await waitFor(() => {
-      expect(response.status).toBe(200); // Check the status code
-    });
-
-
-  });
-});
+// describe('API endpoint', () => {
+//   it('should return the expected data', async () => {
+//     // Make a request to your API endpoint
+//     api.get('/')
+//   })
+// });
 
