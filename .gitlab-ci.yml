@@ -7,6 +7,7 @@ stages:
   - deploy
 
 build-image:
+  stage: build
   image: docker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
@@ -32,7 +33,7 @@ build-image:
 
 
 
-test-job1:
+run_tests:
   stage: test
   image: node:lts-alpine
   script:
