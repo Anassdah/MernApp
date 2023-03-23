@@ -1,17 +1,17 @@
 variables:
-  IMAGE_NAME: anassdahchour/api-server
-
+  IMAGE_API_NAME: anassdahchour/api-server
+  IMAGE_FRONT_NAME: anassdahchour/react-app
 stages:
-  - test
   - build
+  - test
   - deploy
 
 build-image:
-  image: docker:20.10.16
+  image: docker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:20.10.16-dind
+    - docker:dind
 
 
   before_script:
@@ -21,13 +21,12 @@ build-image:
 
   tags:
     - docker
-
-
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-    - docker build -t $IMAGE_NAME .
-    - docker push $IMAGE_NAME
-
+    - docker build -t $IMAGE_API_NAME .
+    - cd client
+    - docker build -t $IMAGE_FRONT_NAME .
+    - docker push $IMAGE_API_NAME
+    - docker push $IMAGE_FRONT_NAME
 
 
 
