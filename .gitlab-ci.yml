@@ -4,10 +4,24 @@ variables:
 stages:
   - build
   - test
+  - package
   - deploy
-
-build-image:
+build:
   stage: build
+  image: node:lts-alpine
+  script:
+    - yarn install --frozen-lockfile
+    - cd client
+    - yarn install --frozen-lockfile
+    - cd ..
+  artifacts:
+    paths:
+      - node_modules/
+      - client/node_modules/
+      - server.ts
+  
+build-image:
+  stage: package
   image: docker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
