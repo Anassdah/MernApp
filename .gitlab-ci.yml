@@ -19,6 +19,8 @@ build:
       - node_modules/
       - client/node_modules/
       - server.ts
+  tags:
+    - docker
   
 build-image:
   stage: package
