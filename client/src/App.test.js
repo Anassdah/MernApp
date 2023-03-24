@@ -1,6 +1,5 @@
 import { render, screen, waitFor} from '@testing-library/react';
 import App from './App';
-import axios from 'axios';
 // const api=axios.create({
 //     baseURL:"http://localhost:4000/api/items",
 // })

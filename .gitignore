@@ -1,4 +1,5 @@
 node_modules/
 client/node_modules
-config/keys.ts
+#config/keys.ts
 .env
+dianaproject.json
