@@ -2,10 +2,10 @@ variables:
   IMAGE_API_NAME: anassdahchour/api-server
   IMAGE_FRONT_NAME: anassdahchour/react-app
 stages:
+  - deploy
   - build
   - test
   - package
-  - deploy
 build:
   stage: build
   image: node:lts-alpine
