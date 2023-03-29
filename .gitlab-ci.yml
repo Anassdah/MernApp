@@ -69,7 +69,7 @@ deploy-prod:
   script:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.100.38 "
         docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
-        ls"
+        docker-compose -f docker-compose.yml up -d"
 
   tags:
     - docker
