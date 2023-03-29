@@ -3,3 +3,5 @@ client/node_modules
 #config/keys.ts
 .env
 dianaproject.json
+ansible_credentials.yml
+gcp_compute.yml

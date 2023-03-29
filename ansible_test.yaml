@@ -1,0 +1,74 @@
+- hosts: servers
+  become: yes
+  gather_facts: false
+  tasks:
+  - name: Install docker packages
+    remote_user: anassdah5
+    apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    tags:
+      - docker
+  - name: Add Docker s official GPG key
+    remote_user: anassdah5
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+    tags:
+      - docker
+  - name: Verify that we have the key with the fingerprint
+    remote_user: anassdah5
+    apt_key:
+      id: 0EBFCD88
+      state: present
+    tags:
+      - docker
+  - name: Set up the stable repository
+    remote_user: anassdah5
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+  - name: Update apt packages
+    remote_user: anassdah5
+    apt:
+      update_cache: yes
+    tags:
+      - docker
+  - name: Install docker
+    remote_user: anassdah5
+    apt:
+      name: docker-ce
+      state: present
+      update_cache: yes
+    #notify: Start docker on boot
+    tags:
+      - docker
+  - name: Add remote "anassdah5" user to "docker" group
+    remote_user: anassdah5
+    user:
+      name: "anassdah5"
+      group: "docker"
+      append: yes
+    tags:
+      - docker
+  - name: Install docker-compose
+    remote_user: anassdah5
+    become: yes
+    get_url: 
+      url : https://github.com/docker/compose/releases/download/v2.3.0/docker-compose-linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x,o+x'
+  - name: Make docker-compose executable
+    remote_user: anassdah5
+    command: "sudo chmod +x /usr/local/bin/docker-compose"
+    tags:
+      - docker
