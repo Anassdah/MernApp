@@ -66,7 +66,7 @@ deploy-prod:
   stage: deploy
   before_script:
     - chmod 400 $SSH_KEY
-    - scp -o StrictHostKeyChecking=no -i $SSH_KEY  docker-compose.yml anassdah5@34.155.100.38
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY  docker-compose.yml anassdah5@34.155.100.38 :~
 
   script:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.100.38 "
