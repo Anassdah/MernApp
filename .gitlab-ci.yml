@@ -4,8 +4,8 @@ variables:
   INSTANCE_IP: anassdah5@34.155.170.255
   
 stages:
-  - deploy
   - build
+  - deploy
   - test
   - package
 build:
