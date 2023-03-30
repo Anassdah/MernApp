@@ -22,6 +22,7 @@ services:
     depends_on:
       - api-server
   mongo:
+    container_name: mongo
     image: mongo:4.2.20-rc0-bionic
     ports:
     - "27017:27017"
