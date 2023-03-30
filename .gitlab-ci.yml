@@ -70,8 +70,11 @@ deploy-prod:
 
   script:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.244.196 "
+        docker kill $(docker ps -q) && docker rm $(docker ps -a -q) && 
         docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
-        docker-compose -f /home/anassdah5/docker-compose.yml up -d"
+        docker run -p 34.155.244.196:3000:3000 $IMAGE_FRONT_NAME "
+        #docker-compose -f /home/anassdah5/docker-compose.yml up -d"
+        
 
   tags:
     - docker
