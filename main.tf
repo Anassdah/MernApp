@@ -16,28 +16,28 @@ provider "google" {
   zone    = var.zone
 }
 #allow ssh
-resource "google_compute_firewall" "ssh-rule" {
-  name = "demo-ssh"
-  network = google_compute_network.vpc_network.name
-  allow {
-    protocol = "tcp"
-    ports = ["22"]
-  }
-  target_tags = ["terraform-instance"]
-  source_ranges = ["0.0.0.0/0"]
-}
-resource "google_compute_firewall" "default" {
+
+resource "google_compute_firewall" "terraform-network" {
   name    = "tf-www-firewall"
-  network = "default"
+  network = google_compute_network.vpc_network.self_link
 
   allow {
     protocol = "tcp"
-    ports    = ["80"]
+    ports    = ["80","3000","4000"]
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["terraform-instance"]
 }
+resource "google_compute_firewall" "icmp" {
+  name    = "allow-icmp"
+  network = google_compute_network.vpc_network.id
+
+  allow {
+    protocol = "icmp"
+  }
+  source_ranges = ["0.0.0.0/0"]
+}
+
 
 resource "google_compute_firewall" "allow_ssh" {
   name    = "allow-ssh"
