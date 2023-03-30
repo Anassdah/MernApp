@@ -5,9 +5,9 @@ variables:
   
 stages:
   - build
-  - deploy
   - test
   - package
+  - deploy
 build:
   stage: build
   image: node:lts-alpine
