@@ -5,8 +5,6 @@ variables:
   
 stages:
   - build
-  - test
-  - package
   - deploy
 build:
   stage: build
@@ -19,7 +17,6 @@ build:
   artifacts:
     paths:
       - node_modules/
-      - docker-compose.yml
       - client/node_modules/
       - server.ts
   tags:
@@ -75,7 +72,7 @@ deploy-prod:
         docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
         docker stop react && docker stop api && docker rmi $IMAGE_API_NAME && docker rmi $IMAGE_FRONT_NAME &&
         docker pull $IMAGE_FRONT_NAME && docker pull $IMAGE_API_NAME &&
-        docker-compose -f /home/anassdah5/docker-compose.yml up -d && docker ps"
+        docker-compose -f /home/anassdah5/docker-compose.yml up -d && docker ps && cat /home/anassdah5/docker-compose.yml "
         #docker run -d -p 3000:3000 $IMAGE_FRONT_NAME &&
         #docker run -d -p 27017:27017 mongo:4.2.20-rc0-bionic &&
         #docker run -d -p 4000:4000 $IMAGE_API_NAME "
