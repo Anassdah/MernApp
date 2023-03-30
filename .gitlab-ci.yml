@@ -71,7 +71,7 @@ deploy-prod:
     - scp -o StrictHostKeyChecking=no -i $SSH_KEY ./docker-compose.yml anassdah5@34.155.170.255:/home/anassdah5/
 
   script:
-    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $INSTANCE_IP "
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.170.255 "
         docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
         docker kill '$(docker ps -q)' && docker rm '$(docker ps -a -q)' &&
         docker-compose -f /home/anassdah5/docker-compose.yml up -d"
