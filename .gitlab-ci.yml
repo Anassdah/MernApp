@@ -71,11 +71,11 @@ deploy-prod:
   script:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.244.196 "
         docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
-        docker run -d -p 3000:3000 $IMAGE_FRONT_NAME &&
-        docker run -d -p 27017:27017 mongo:4.2.20-rc0-bionic &&
-        docker run -d -p 4000:4000 $IMAGE_API_NAME "
+        docker-compose -f /home/anassdah5/docker-compose.yml up -d"
+        #docker run -d -p 3000:3000 $IMAGE_FRONT_NAME &&
+        #docker run -d -p 27017:27017 mongo:4.2.20-rc0-bionic &&
+        #docker run -d -p 4000:4000 $IMAGE_API_NAME "
         #docker kill $(docker ps -q) && docker rm $(docker ps -a -q) &&
-        #docker-compose -f /home/anassdah5/docker-compose.yml up -d"
 
         
 
