@@ -68,7 +68,7 @@ deploy-prod:
   stage: deploy
   before_script:
     - chmod 400 $SSH_KEY
-    - scp -o StrictHostKeyChecking=no -i $SSH_KEY ./docker-compose.yml $INSTANCE_IP :/home/anassdah5/
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY ./docker-compose.yml '$INSTANCE_IP':/home/anassdah5/
 
   script:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $INSTANCE_IP "
