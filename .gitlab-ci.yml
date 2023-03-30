@@ -66,10 +66,10 @@ deploy-prod:
   stage: deploy
   before_script:
     - chmod 400 $SSH_KEY
-    - scp -o StrictHostKeyChecking=no -i $SSH_KEY ./docker-compose.yml anassdah5@34.155.100.38:/home/anassdah5/
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY ./docker-compose.yml anassdah5@34.155.244.196:/home/anassdah5/
 
   script:
-    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.100.38 "
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.244.196 "
         docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
         docker-compose -f /home/anassdah5/docker-compose.yml up -d"
 
