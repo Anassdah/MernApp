@@ -5,7 +5,7 @@ import {v1 as uuid} from 'uuid';
 import '../App.css';
 import axios from 'axios';
 const api=axios.create({
-    baseURL:"http://localhost:4000/api/items",
+    baseURL:"http://34.155.170.255:4000/api/items",
 })
 function ShoppingList(){
     const LOCAL_STORAGE_KEY='anass.dahchour'
