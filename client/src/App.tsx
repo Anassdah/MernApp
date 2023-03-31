@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <AppNavBar/>
       <ShoppingList/>
-     <h1>Hello world from Inria</h1>
+     <h1>Hello world from DIANA</h1>
     </div>
   );
 }
