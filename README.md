@@ -109,7 +109,8 @@ Make sure that your application is correctly configured, run it in your localhos
 You can add -d option for detached mode. Our application consists of 3 containers, a frontend container, an api container and the mondo db container.
 ### CI/CD
 We want to automate the different steps stated above that lead to deploying the application to google cloud, we therefore have 4 stages in our pipeline: build stage that will check that the code is correctly integrated , a test stage were we automate the testing process, a package stage were we build the docker containers and push them to docker hub and finally the deploy stage were we ssh to the GCP instance and run our containers. You can check the details in gitlab-ci.yml file. Make a change to your application and the pipeline will be triggered to automatically deploy changes.
-
+### Notes
+Make sure to do terraform destory when you finish the project. Also note that i used my own GCP account so you need to configure a service to allow terraform to access your account with a private key in your local machine. You also need to check that you have the right ip address in your react aplication once you create the ressources via terraform, after terraform apply we configured the outputs to show the access ip of the created vm, make sure to add it to ansible hosts.ini or have it generated automatically with terraform and change tha api endpoint to your_ip/api/items.
 
 
  
