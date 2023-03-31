@@ -25,7 +25,7 @@
 <br />
 
 
-## MERN application with CI/CD
+## MERN application with Gitlab CI/CD
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
