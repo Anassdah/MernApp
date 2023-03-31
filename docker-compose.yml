@@ -2,16 +2,18 @@ version: "3.8"
 services:
   api-server:
     image: anassdahchour/api-server
+    container_name: api
     ports:
       - "4000:4000"
     environment:
-      - DB-URL=mongodb://mongo/myFirstDatabase.items
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_URI}
     networks:
       - mern-app
     depends_on:
       - mongo
   react-app:
     image: anassdahchour/react-app
+    container_name: react
     stdin_open: true
     ports: 
       - "3000:3000"
@@ -20,9 +22,13 @@ services:
     depends_on:
       - api-server
   mongo:
+    container_name: mongo
     image: mongo:4.2.20-rc0-bionic
     ports:
     - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
 networks:
   mern-app:
     driver: bridge

@@ -1,0 +1,86 @@
+variables:
+  IMAGE_API_NAME: anassdahchour/api-server
+  IMAGE_FRONT_NAME: anassdahchour/react-app
+  INSTANCE_IP: anassdah5@34.155.170.255
+  
+stages:
+  - build
+  - test
+  - package
+  - deploy
+build:
+  stage: build
+  image: node:lts-alpine
+  script:
+    - yarn install --frozen-lockfile
+    - cd client
+    - yarn install --frozen-lockfile
+    - cd ..
+  artifacts:
+    paths:
+      - node_modules/
+      - client/node_modules/
+      - server.ts
+  tags:
+    - docker
+  
+build-image:
+  stage: package
+  image: docker
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:dind
+
+
+  before_script:
+    - docker info
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD"
+    - echo $DOCKER_HOST
+
+  tags:
+    - docker
+  script:
+    - docker build -t $IMAGE_API_NAME .
+    - cd client
+    - docker build -t $IMAGE_FRONT_NAME .
+    - docker push $IMAGE_API_NAME
+    - docker push $IMAGE_FRONT_NAME
+
+
+
+
+
+run_tests:
+  stage: test
+  image: node:lts-alpine
+  script:
+    - cd client
+    - yarn install
+    - yarn test
+  tags:
+    - docker
+
+
+
+deploy-prod:
+  stage: deploy
+  before_script:
+    - chmod 400 $SSH_KEY
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY ./docker-compose.yml anassdah5@34.155.170.255:/home/anassdah5/
+
+  script:
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY anassdah5@34.155.170.255 "
+        docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" &&
+        docker stop react && docker rm react && docker stop api && docker rm api && 
+        docker rmi $IMAGE_API_NAME && docker rmi $IMAGE_FRONT_NAME &&
+        docker-compose -f /home/anassdah5/docker-compose.yml up -d && docker ps && cat /home/anassdah5/docker-compose.yml "
+        #docker run -d -p 3000:3000 $IMAGE_FRONT_NAME &&
+        #docker run -d -p 27017:27017 mongo:4.2.20-rc0-bionic &&
+        #docker run -d -p 4000:4000 $IMAGE_API_NAME "
+        #docker kill $(docker ps -q) && docker rm $(docker ps -a -q) &&
+
+        
+
+  tags:
+    - docker
