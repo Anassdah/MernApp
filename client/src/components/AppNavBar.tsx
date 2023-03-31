@@ -26,12 +26,12 @@ function AppNavBar(this: any){
             <div>
             <Navbar color="dark" dark expand="md" className="mb-5">
                 <Container className="NavBar">
-                    <NavbarBrand href="/">ShoppingList</NavbarBrand>
+                    <NavbarBrand href="/">Sophia node</NavbarBrand>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/http://www.google.com/">Google</NavLink>
+                                <NavLink href="http://www.google.com/">Inria</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
