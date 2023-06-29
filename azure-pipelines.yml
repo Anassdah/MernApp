@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: z1
+  name: Default
 
 steps:
 - task: NodeTool@0
