@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: node:lts-alpine
+  vmImage: ubuntu-latest
 
 steps:
 
